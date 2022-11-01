@@ -1,7 +1,7 @@
 ### Architecture
-Frontend: React.js
-Backend: Node.js
-Database: mysql
+- Frontend: React.js
+- Backend: Node.js
+- Database: mysql
 
 ### Procedures
 ```
