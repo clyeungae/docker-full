@@ -1,0 +1,38 @@
+
+services:
+  db:
+    image: mysql:8
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: dev
+    volumes:
+      - mysql-data:/var/lib/mysql
+  pma:
+    depends_on:
+     - db
+    image: phpmyadmin:5.2
+    restart: always
+    ports:
+     - 8080:80
+    environment:
+      PMA_HOST: db
+  server:
+    depends_on:
+      - db
+    image: server-template
+    restart: always
+    ports:
+      - 3001:3001
+  www:
+    depends_on:
+      - server
+    image: www-template
+    ports:
+      - 3000:3000
+
+volumes:
+  mysql-data:
+    driver: local
