@@ -21,22 +21,12 @@ exports.init = async function (_opts) {
   });
 }
 
-exports.selectFlashCard = async function (id) {
+exports.selectItem = async function (id) {
   const [rs] = await connection.execute(
-    'SELECT * FROM `flashcard` WHERE `id` = ?',
+    'SELECT * FROM `test` WHERE `id` = ?',
     [id]
   );
 
-  if (rs.length === 0) throw new Error('flashcard not found');
-  return rs[0];
-}
-
-exports.insertFlashCard = async function (keyword, answer) {
-  const [rs] = await connection.execute(
-    'INSERT INTO `flashcard` VALUES(NULL, ?, ?)',
-    [keyword, answer]
-  );
-
-  if (rs.length === 0) throw new Error('flashcard not found');
+  if (rs.length === 0) throw new Error('not found');
   return rs[0];
 }

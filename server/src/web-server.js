@@ -2,6 +2,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const express = require('express');
 const http = require('http');
+const model = require('./model');
 
 const port = 3001;
 
@@ -19,12 +20,9 @@ exports.createWebServer = function () {
     res.send('server is working');
   });
 
-  app.post('/api/add', (req, res) => {
-    res.send('hello world');
-  });
-
-  app.get('/api/random', (req, res) => {
-    res.send('hello world');
+  app.get('/api/random', async (req, res) => {
+    const rs = await model.selectItem(1);
+    res.send({rs});
   })
 
   app.use(function (req, res) {res.sendStatus(404);});
